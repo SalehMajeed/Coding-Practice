@@ -45,8 +45,26 @@ console.log(halloween("2011/10/12"))
 // 		calculator.subtract(10, 5) ➞ 5
 // 		calculator.multiply(10, 5) ➞ 50
 // 		calculator.divide(10, 5) ➞ 2
-// function Calculator(){
-// }
+console.log("85 --->")
+function Calculator(){  
+}
+Calculator.prototype.add = function (n1, n2){
+  return (n1 + n2)
+}
+Calculator.prototype.subtract = function (n1, n2){
+  return (n1 - n2)
+}
+Calculator.prototype.multiply = function (n1, n2){
+  return (n1 * n2)
+}
+Calculator.prototype.divide = function (n1, n2){
+  return (n1 / n2)
+}
+var calculator = new Calculator()
+console.log(calculator.add(10, 5))
+console.log(calculator.subtract(10, 5))
+console.log(calculator.multiply(10, 5))
+console.log(calculator.divide(10, 5))
 
 // 86 ==>	Limit a Number's Value
 // 	Create a function that takes three number arguments — one number as an input and two additional numbers representing the endpoints of a closed range — and return the number limited to this range.
