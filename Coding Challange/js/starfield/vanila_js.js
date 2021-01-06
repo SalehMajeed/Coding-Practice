@@ -1,20 +1,42 @@
 class Starfiled {
-    constructor() {
-        this.create_canvas(300,300)
-    }
-	create_canvas(width, height) {
-		const canvas = document.createElement('canvas');
-		canvas.setAttribute('width', width);
-		canvas.setAttribute('height', height);
-		canvas.style.backgroundColor = 'black';
-		let ctx = canvas.getContext('2d');
-		ctx.fillStyle = 'rgb(200,0,0)';
-		ctx.fillRect(10, 10, 50, 50);
-
-		ctx.fillStyle = 'rgba(0, 0, 200, 0.5)';
-		ctx.fillRect(30, 30, 50, 50);
-		document.body.append(canvas);
+	constructor() {
+		this.canvas = null;
+		this.width = 300;
+        this.height = 300;
+        
+        
+        this.create_canvas();
+        for (let i = 0; i < 20; i++){
+            const x = this.random(-this.width,this.height)
+            const y = this.random(-this.height, this.height);
+            const r = this.random(5,10)
+            this.create_ellipse(x, y, r)
+        }
 	}
+
+	create_canvas() {
+		this.canvas = document.createElement('canvas');
+		this.canvas.setAttribute('width', this.width);
+		this.canvas.setAttribute('height', this.height);
+		this.canvas.style.backgroundColor = 'black';
+		document.body.append(this.canvas);
+	}
+	create_ellipse(x, y, r) {
+		const ctx = this.canvas.getContext('2d');
+
+		ctx.beginPath();
+		ctx.ellipse(x, y, r, r, 0, 0, 10, false);
+		ctx.fillStyle = 'white';
+		ctx.fill();
+		ctx.stroke();
+	}
+
+	random(min, max) {
+		min = Math.ceil(min);
+        max = Math.floor(max);
+        let random_number = Math.floor(Math.random() * (max - min + 1) + min)
+        return random_number >= 0 ? random_number : -(random_number)
+    }
 }
 
 document.addEventListener('DOMContentLoaded', new Starfiled());
