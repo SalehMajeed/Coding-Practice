@@ -2,18 +2,20 @@ class Starfiled {
 	constructor() {
 		this.canvas = null;
 		this.width = 300;
-        this.height = 300;
-        
-        
-        this.create_canvas();
-        for (let i = 0; i < 20; i++){
-            const x = this.random(-this.width,this.height)
-            const y = this.random(-this.height, this.height);
-            const r = this.random(5,10)
-            this.create_ellipse(x, y, r)
-        }
+		this.height = 300;
+		this.stars = [];
+
+		this.create_canvas();
+		for (let i = 0; i < 20; i++) {
+			const x = this.random(-this.width, this.height);
+			const y = this.random(-this.height, this.height);
+			const r = this.random(5, 10);
+			this.create_ellipse(x, y, r);
+		}
+		console.log(this.stars)
 	}
 
+	draw() {}
 	create_canvas() {
 		this.canvas = document.createElement('canvas');
 		this.canvas.setAttribute('width', this.width);
@@ -29,14 +31,15 @@ class Starfiled {
 		ctx.fillStyle = 'white';
 		ctx.fill();
 		ctx.stroke();
+		ctx.closePath();
 	}
 
 	random(min, max) {
 		min = Math.ceil(min);
-        max = Math.floor(max);
-        let random_number = Math.floor(Math.random() * (max - min + 1) + min)
-        return random_number >= 0 ? random_number : -(random_number)
-    }
+		max = Math.floor(max);
+		let random_number = Math.floor(Math.random() * (max - min + 1) + min);
+		return random_number >= 0 ? random_number : -random_number;
+	}
 }
 
 document.addEventListener('DOMContentLoaded', new Starfiled());
