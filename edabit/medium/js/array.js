@@ -17,11 +17,11 @@ function likeOrDislike(arr) {
 	});
 	return message;
 }
-// console.log(likeOrDislike([]));
-// console.log(likeOrDislike(['Dislike']));
-// console.log(likeOrDislike(['Like', 'Like']));
-// console.log(likeOrDislike(['Dislike', 'Like']));
-// console.log(likeOrDislike(['Like', 'Dislike', 'Dislike']));
+console.log(likeOrDislike([]));
+console.log(likeOrDislike(['Dislike']));
+console.log(likeOrDislike(['Like', 'Like']));
+console.log(likeOrDislike(['Dislike', 'Like']));
+console.log(likeOrDislike(['Like', 'Dislike', 'Dislike']));
 
 console.log('question 3 ->');
 // Write a function that converts an object into an array, where each element represents a key-value pair in the form of an array.
@@ -216,6 +216,7 @@ console.log('question 15 ->');
 // You're given a string of words. You need to find the word "Nemo", and return a string like this: "I found Nemo at [the order of the word you find nemo]!".
 // If you can't find Nemo, return "I can't find Nemo :(".
 function findNemo(str) {
+	//use string function
 	const is_exist = str.split(' ').indexOf('Nemo') + 1;
 	return is_exist != 0 ? `I found Nemo at ${is_exist}` : "I can't find Nemo";
 }
@@ -290,5 +291,5 @@ console.log('question 19 ->');
 function indexMultiplier(arr) {
 	return arr.reduce((acc, val, index) => (acc += val * index), 0);
 }
-console.log(indexMultiplier([1, 2, 3, 4, 5]));
-console.log(indexMultiplier([-3, 0, 8, -6]));
+// console.log(indexMultiplier([1, 2, 3, 4, 5]));
+// console.log(indexMultiplier([-3, 0, 8, -6]));
