@@ -1,9 +1,9 @@
 // class Stack {
-// 	constructor(input = '') {
-// 		this.input = input
-// 			.replace(/[^0-9^a-z]/gi, ' ')
-// 			.trim()
-// 			.split(' ');
+// constructor(input = '') {
+// 	this.input = input
+// 		.replace(/[^0-9^a-z]/gi, ' ')
+// 		.trim()
+// 		.split(' ');
 // 		this.operations = input
 // 			.replace(/[0-9a-z]/gi, '')
 // 			.trim()
@@ -50,19 +50,16 @@ class stack {
 
 	run(instructions) {
 		this.stack = instructions
-			.replace(/[+-/*]|DUP|POP/g, '')
+			.replace(/[^0-9]/gi, ' ')
 			.trim()
 			.split(' ');
-		this.operations = instructions.replace(/[0-9]/g, '').trim().split(' ');
-		if (this.stack.length == 1 && this.operations.length <= 1) return this.stack[0];
+		this.operations = instructions
+			.replace(/[0-9] /gi, '')
+			.trim()
+			.split(' ');
 		for (let i = 0; i < this.operations.length; i++) {
-			let [x, y] = [this.stack.pop(), this.stack.pop()];
-			if (isNaN(+x) || (isNaN(+y) && typeof y != undefined)) {
-				return `invalid Invalid instruction: ${x || y}`;
-			} else {
-				x = +x;
-				y = +y;
-			}
+			let [x, y] = [+this.stack.pop(), +this.stack.pop()];
+
 			switch (this.operations[i]) {
 				case '+':
 					this.stack.push(x + y);
@@ -77,6 +74,7 @@ class stack {
 					this.stack.push(x / y);
 					break;
 				case 'DUP':
+					x = x > 0 ? x : y;
 					this.stack.push(x, x);
 					break;
 				case 'POP':
@@ -111,8 +109,8 @@ class stack {
 
 	// console.log(StackCalc1.run('12')); /// 12
 	// console.log(StackCalc2.run('5 6 +')); // 11
-	console.log(StackCalc3.run('3 6 -')); // 3
-	// console.log(StackCalc4.run('3 DU/P +')); // 6
+	// console.log(StackCalc3.run('3 6 -')); // 3
+	// console.log(StackCalc4.run('3 DUP +')); // 6
 	console.log(StackCalc5.run('2 5 - 5 + DUP +')); // 16
 	console.log(StackCalc6.run('9 14 DUP + - 3 POP')); // 19
 	console.log(StackCalc7.run('1 2 3 4 5 POP POP POP')); // 2
