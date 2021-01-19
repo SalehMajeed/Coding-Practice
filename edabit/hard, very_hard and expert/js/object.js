@@ -90,3 +90,66 @@ function getFrequencies(arr) {
 // console.log(getFrequencies([true, false, true, false, false])); // { true: 2, false: 3 }
 
 // console.log(getFrequencies([])); // {}
+
+// The insurance guy laughs, he's just kidding. He just needs an updated list. You just need one of those Rammstein Vodka bottles.
+// Given an object with alcoholic drinks and a number, return a string with the name of the Rammstein bottle that matches the given number.
+function get_bottle(obj, num) {
+	for (const key in obj) {
+		if (key != 'whiskey' && obj[key] == num) return key;
+	}
+}
+// console.log(get_bottle({ whiskey: 100, 'Rammstein A': 100, 'Rammstein B': 50 }, 100)); // "Rammstein A"
+// // number = 100
+
+// console.log(get_bottle({ whiskey: 100, 'Rammstein A': 100, 'Rammstein B': 50 }, 50)); // "Rammstein B"
+// // number = 50
+
+// console.log(get_bottle({ whiskey: 100, 'Rammstein A': 100, 'Rammstein D': 70, beer: 70 }, 70)); // "Rammstein D"
+// // number = 70
+
+// Create a function that takes an array of objects like { name: "John", notes: [3, 5, 4] } and returns an array of objects like { name: "John", topNote: 5 }.
+// If student has no notes (an empty array) then let's assume topNote: 0.
+
+function getStudentsWithNamesAndTopNotes(obj) {
+	return { name: obj.name, topNote: Math.max(...obj.notes) };
+}
+
+// console.log(getStudentsWithNamesAndTopNotes({ name: 'John', notes: [3, 5, 4] })); // { "name": "John", "topNote": 5 }
+
+// console.log(getStudentsWithNamesAndTopNotes({ name: 'Max', notes: [1, 4, 6] })); // { "name": "Max", "topNote": 6 }
+
+// console.log(getStudentsWithNamesAndTopNotes({ name: 'Zygmund', notes: [1, 2, 3] })); // { "name": "Zygmund", "topNote": 3 }
+
+class Circle {
+	constructor(radius) {
+		this.radius = radius;
+		this.diameter = radius * 2;
+	}
+	getC() {
+		return +(2 * Math.PI * this.radius).toFixed(2);
+	}
+	getA() {
+		return +(this.radius ** 2 * Math.PI).toFixed(2);
+	}
+}
+
+// const c0 = new Circle(1);
+// console.log(c0.diameter);
+// console.log(c0.getC());
+// console.log(c0.getA());
+
+// Create a function that converts color in RGB format to Hex format.
+function rgbToHex(str) {
+	colour = [];
+	str.replace(/[a-z())]+/g, '')
+		.split(',')
+		.map(val => colour.push(val.length < 2 ? '0' + Number(val).toString(16) : Number(val).toString(16)));
+	return '#' + colour.join('');
+}
+console.log(rgbToHex('rgb(0, 128, 192)')); // "#0080c0"
+console.log(rgbToHex('rgb(45, 255, 192)')); // "#2dffc0"
+console.log(rgbToHex('rgb(0, 0, 0)')); // "#000000"
+
+// rgb ->
+// hex ->
+// hsl ->
