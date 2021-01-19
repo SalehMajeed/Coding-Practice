@@ -143,7 +143,11 @@ function rgbToHex(str) {
 	colour = [];
 	str.replace(/[a-z())]+/g, '')
 		.split(',')
-		.map(val => colour.push(val.length < 2 ? '0' + Number(val).toString(16) : Number(val).toString(16)));
+		.map(val => {
+			let value = Number(val).toString(16);
+			value = value < 2 ? `0${value}` : value;
+			colour.push(value);
+		});
 	return '#' + colour.join('');
 }
 console.log(rgbToHex('rgb(0, 128, 192)')); // "#0080c0"
