@@ -150,10 +150,60 @@ function rgbToHex(str) {
 		});
 	return '#' + colour.join('');
 }
-console.log(rgbToHex('rgb(0, 128, 192)')); // "#0080c0"
-console.log(rgbToHex('rgb(45, 255, 192)')); // "#2dffc0"
-console.log(rgbToHex('rgb(0, 0, 0)')); // "#000000"
+// console.log(rgbToHex('rgb(0, 128, 192)')); // "#0080c0"
+// console.log(rgbToHex('rgb(45, 255, 192)')); // "#2dffc0"
+// console.log(rgbToHex('rgb(0, 0, 0)')); // "#000000"
 
 // rgb ->
 // hex ->
 // hsl ->
+
+// Given a word, create an object that stores the indexes of each letter in an array.
+// Make sure the letters are the keys.
+// Make sure the letters are symbols.
+// Make sure the indexes are stored in an array and those arrays are values.
+function mapLetters(str) {
+	const obj = {};
+	str.split('').map((val, index) => {
+		if (!(val in obj)) {
+			obj[`${val}`] = [index];
+		} else {
+			obj[`${val}`].push(index);
+		}
+	});
+	return obj;
+}
+// console.log(mapLetters('dodo')); // { d: [0, 2], o: [1, 3] }
+// console.log(mapLetters('froggy')); // { f: [0], r: [1], o: [2], g: [3, 4], y: [5] }
+// console.log(mapLetters('grapes')); // { g: [0], r: [1], a: [2], p: [3], e: [4], s: [5] }
+
+// Today you volunteered as a librarian. You were given an array of objects, each one containing different book information. You need to sort the objects in alphabetical order of the author's last name.
+function sortByLastName(books) {
+	return books.sort((a, b) => (a.author.split(' ')[1] > b.author.split(' ')[1] ? 1 : -1));
+}
+console.log(
+	sortByLastName([
+		{ name: 'Harry Potter', rating: '8+', author: 'Joanne Rowling' },
+		{ name: 'Warcross', rating: '13+', author: 'Marie Lu' },
+		{ name: 'The Hunger Games', rating: '12+', author: 'Suzanne Collins' },
+	])
+);
+console.log(
+	sortByLastName([
+		{ name: 'The Night Gardner', rating: '10+', author: 'Jonathan Auxier' },
+		{ name: 'Harry Potter', rating: '8+', author: 'Joanne Rowling' },
+	])
+);
+console.log(
+	sortByLastName([
+		{ name: 'The Night Gardner', rating: '10+', author: 'Jonathan Auxier' },
+		{ name: 'The Selection', rating: '13+', author: 'Kiera Cass' },
+		{ name: 'The School for Good and Evil', rating: '11+', author: 'Soman Chainani' },
+		{ name: 'Warcross', rating: '13+', author: 'Marie Lu' },
+	])
+);
+//[
+//   { name: "The Hunger Games", rating: "12+", author: "Suzanne Collins" },
+//   { name: "Warcross", rating: "13+", author: "Marie Lu" },
+//   { name: "Harry Potter", rating: "8+", author: "Joanne Rowling" },
+// ]

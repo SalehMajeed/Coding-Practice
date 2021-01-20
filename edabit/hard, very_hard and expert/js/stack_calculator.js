@@ -43,22 +43,28 @@
 // const StackCalc6 = new Stack('x y +'); // Invalid instruction: x
 
 class stack {
+	// Use propper definition
 	constructor() {
 		this.stack = [];
 	}
 	run(instructions) {
 		const instruct = instructions.split(' ');
 		for (let i = 0; i < instruct.length; i++) {
-			if (/\d/.test(instruct[i])) this.stack.push(instruct[i]);
-			else if (/DUP|POP/.test(instruct[i])) {
+			if (/\d/.test(instruct[i])) {
+				this.stack.push(instruct[i]);
+			} else if (/DUP|POP/.test(instruct[i])) {
+				//use DUP and POP seperate
 				if (instruct[i] == 'DUP') {
 					this.stack.push(this.stack[this.stack.length - 1]);
 				} else {
 					this.stack.pop();
 				}
 			} else if ('+-*/'.indexOf(instruct[i]) > -1) {
+				//use includes
 				this.perform_operation(instruct[i]);
-			} else return `Invalid instruction:${instruct[i]}`;
+			} else {
+				return `Invalid instruction : ${instruct[i]}`;
+			}
 		}
 		return this.value;
 	}
@@ -69,10 +75,7 @@ class stack {
 
 	perform_operation(instuction) {
 		let [x, y] = [+this.stack.pop(), +this.stack.pop()];
-		if (x < y) {
-			[x, y] = [y, x];
-		}
-		switch (instuction) {
+		switch (instuction) {// use eval
 			case '+':
 				this.stack.push(x + y);
 				break;
