@@ -45,82 +45,80 @@
 class stack {
 	constructor() {
 		this.stack = [];
-		this.operations = [];
 	}
-
 	run(instructions) {
-		this.stack = instructions
-			.replace(/[^0-9]/gi, ' ')
-			.trim()
-			.split(' ');
-		this.operations = instructions
-			.replace(/[0-9] /gi, '')
-			.trim()
-			.split(' ');
-		for (let i = 0; i < this.operations.length; i++) {
-			let [x, y] = [+this.stack.pop(), +this.stack.pop()];
-
-			switch (this.operations[i]) {
-				case '+':
-					this.stack.push(x + y);
-					break;
-				case '-':
-					this.stack.push(x - y);
-					break;
-				case '*':
-					this.stack.push(x * y);
-					break;
-				case '/':
-					this.stack.push(x / y);
-					break;
-				case 'DUP':
-					x = x > 0 ? x : y;
-					this.stack.push(x, x);
-					break;
-				case 'POP':
-					break;
-			}
+		const instruct = instructions.split(' ');
+		for (let i = 0; i < instruct.length; i++) {
+			if (/\d/.test(instruct[i])) this.stack.push(instruct[i]);
+			else if (/DUP|POP/.test(instruct[i])) {
+				if (instruct[i] == 'DUP') {
+					this.stack.push(this.stack[this.stack.length - 1]);
+				} else {
+					this.stack.pop();
+				}
+			} else if ('+-*/'.indexOf(instruct[i]) > -1) {
+				this.perform_operation(instruct[i]);
+			} else return `Invalid instruction:${instruct[i]}`;
 		}
-
-		return this.stack[0];
+		return this.value;
 	}
 
 	get value() {
-		return this.stack;
+		return this.stack[this.stack.length - 1] || 0;
+	}
+
+	perform_operation(instuction) {
+		let [x, y] = [+this.stack.pop(), +this.stack.pop()];
+		if (x < y) {
+			[x, y] = [y, x];
+		}
+		switch (instuction) {
+			case '+':
+				this.stack.push(x + y);
+				break;
+			case '-':
+				this.stack.push(x - y);
+				break;
+			case '*':
+				this.stack.push(x * y);
+				break;
+			case '/':
+				this.stack.push(x / y);
+				break;
+		}
 	}
 }
-{
-	const StackCalc1 = new stack();
-	const StackCalc2 = new stack();
-	const StackCalc3 = new stack();
-	const StackCalc4 = new stack();
-	const StackCalc5 = new stack();
-	const StackCalc6 = new stack();
-	const StackCalc7 = new stack();
-	const StackCalc8 = new stack();
-	const StackCalc9 = new stack();
-	const StackCalc10 = new stack();
-	const StackCalc11 = new stack();
-	const StackCalc12 = new stack();
-	const StackCalc13 = new stack();
-	const StackCalc14 = new stack();
-	const StackCalc15 = new stack();
-	const StackCalc16 = new stack();
 
-	// console.log(StackCalc1.run('12')); /// 12
-	// console.log(StackCalc2.run('5 6 +')); // 11
-	// console.log(StackCalc3.run('3 6 -')); // 3
-	// console.log(StackCalc4.run('3 DUP +')); // 6
-	console.log(StackCalc5.run('2 5 - 5 + DUP +')); // 16
-	console.log(StackCalc6.run('9 14 DUP + - 3 POP')); // 19
-	console.log(StackCalc7.run('1 2 3 4 5 POP POP POP')); // 2
-	console.log(StackCalc8.run('13 DUP 4 POP 5 DUP + DUP + -')); // 7
-	console.log(StackCalc9.run('6 5 5 7 * - /')); // 5
-	console.log(StackCalc10.run('4 2 4 * 3 + 5 + / 5 -')); // 1
-	console.log(StackCalc11.run('5 8 + 4 5 1 + POP 13 +')); // 17
-	console.log(StackCalc12.run('x')); // Invalid instruction: x
-	console.log(StackCalc13.run('4 6 + x')); // Invalid instruction: x
-	console.log(StackCalc14.run('y x *')); // Invalid instruction: y
-	console.log(StackCalc15.run('')); // 0
-	console.log(StackCalc16.run('4')); // 0
-}
+const StackCalc1 = new stack();
+const StackCalc2 = new stack();
+const StackCalc3 = new stack();
+const StackCalc4 = new stack();
+const StackCalc5 = new stack();
+const StackCalc6 = new stack();
+const StackCalc7 = new stack();
+const StackCalc8 = new stack();
+const StackCalc9 = new stack();
+const StackCalc10 = new stack();
+const StackCalc11 = new stack();
+const StackCalc12 = new stack();
+const StackCalc13 = new stack();
+const StackCalc14 = new stack();
+const StackCalc15 = new stack();
+const StackCalc16 = new stack();
+
+console.log(StackCalc1.run('12')); /// 12
+console.log(StackCalc2.run('5 6 +')); // 11
+console.log(StackCalc3.run('3 6 -')); // 3
+console.log(StackCalc4.run('3 DUP +')); // 6
+console.log(StackCalc5.run('2 5 - 5 + DUP +')); // 16
+console.log(StackCalc6.run('9 14 DUP + - 3 POP')); // 19
+console.log(StackCalc7.run('1 2 3 4 5 POP POP POP')); // 2
+console.log(StackCalc8.run('13 DUP 4 POP 5 DUP + DUP + -')); // 7
+console.log(StackCalc9.run('6 5 5 7 * - /')); // 5
+console.log(StackCalc10.run('4 2 4 * 3 + 5 + / 5 -')); // 1
+console.log(StackCalc11.run('5 8 + 4 5 1 + POP 13 +')); // 17
+console.log(StackCalc12.run('x')); // Invalid instruction: x
+console.log(StackCalc13.run('4 6 + x')); // Invalid instruction: x
+console.log(StackCalc14.run('y x *')); // Invalid instruction: y
+console.log(StackCalc15.run('')); // 0
+console.log(StackCalc16.run('4')); // 4
