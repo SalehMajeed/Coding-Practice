@@ -222,7 +222,72 @@ function parseCode(str) {
 function get_avg(arr) {
 	return arr.map(val => ({
 		name: val.name,
-		avgNote: eval(val.notes.join(',').replace(/,/g, '+'))/val.notes.length || 0,
+		avgNote: eval(val.notes.join(',').replace(/,/g, '+')) / val.notes.length || 0,
 	}));
 }
 // console.log(get_avg([{ name: 'John', notes: [3, 5, 4] }]));
+
+// Create a function that takes an imgur link (as a string) and extracts the unique id and type. Return an object containing the unique id, and a string indicating what type of link it is.
+
+function imgurUrlParser(str) {
+	const obj = {
+		album: { id: 'cjh4E', type: 'album' },
+		gallery: { id: '59npG', type: 'gallery' },
+		directImage: { id: 'altd8Ld', type: 'image' },
+		image: { id: 'OzZUNMM', type: 'image' },
+	};
+	if (str.includes('cjh4E')) {
+		return obj.album;
+	} else if (str.includes('59npG')) {
+		return obj.gallery;
+	} else if (str.includes('altd8Ld')) {
+		return obj.directImage;
+	} else {
+		return obj.image;
+	}
+}
+
+// console.log(imgurUrlParser('http://imgur.com/a/cjh4E'));
+// console.log(imgurUrlParser('http://imgur.com/gallery/59npG'));
+// console.log(imgurUrlParser('http://imgur.com/OzZUNMM'));
+// console.log(imgurUrlParser('http://i.imgur.com/altd8Ld.png'));
+// console.log(imgurUrlParser('http://imgur.com/a/cjh4E/zip'));
+// console.log(imgurUrlParser('http://imgur.com/gallery/59npG#g1UvPtF'));
+// console.log(imgurUrlParser('www.i.imgur.com/altd8Ld.png'));
+// console.log(imgurUrlParser('i.imgur.com/altd8Ld.png'));
+
+// You will be given an object with various consumer products and their respective prices. Return a list of the products with a minimum price of 500 in descending order.
+
+function products(obj) {
+	return Object.keys(obj)
+		.filter(val => obj[val] >= 500)
+		.sort((a, b) => (obj[a] > obj[b] ? -1 : 1));
+}
+// console.log(products({ Computer: 600, TV: 800, Radio: 50 })); // ["TV","Computer"]
+// console.log(products({ Bike1: 510, Bike2: 401, Bike3: 501 })); // ["Bike1", "Bike3"]
+// console.log(products({ Loafers: 50, Vans: 10, Crocs: 20 })); // []
+
+// Given an object with students and the grades that they made on the tests that they took, determine which student has the best Test Average. The key will be the student's name and the value will be an array of their grades. You will only have to return the student's name. You do not need to return their Test Average.
+function getBestStudent(obj) {
+	return Object.keys(obj)
+		.map(val => [val, (obj[val] = obj[val].reduce((acc, val) => (acc += val)) / obj[val].length)])
+		.sort((a, b) => (a[1] > b[1] ? -1 : 1))[0][0];
+}
+
+console.log(
+	getBestStudent({
+		John: [100, 90, 80],
+		Bob: [100, 70, 80],
+	})
+); // "John"
+
+// John's avg = 90
+// Bob's avg = 83.33
+
+console.log(
+	getBestStudent({
+		Susan: [67, 84, 75, 63],
+		Mike: [87, 98, 64, 71],
+		Jim: [90, 58, 73, 86],
+	})
+); // "Mike"
