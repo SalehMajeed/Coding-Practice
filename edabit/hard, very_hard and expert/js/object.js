@@ -181,29 +181,48 @@ function mapLetters(str) {
 function sortByLastName(books) {
 	return books.sort((a, b) => (a.author.split(' ')[1] > b.author.split(' ')[1] ? 1 : -1));
 }
-console.log(
-	sortByLastName([
-		{ name: 'Harry Potter', rating: '8+', author: 'Joanne Rowling' },
-		{ name: 'Warcross', rating: '13+', author: 'Marie Lu' },
-		{ name: 'The Hunger Games', rating: '12+', author: 'Suzanne Collins' },
-	])
-);
-console.log(
-	sortByLastName([
-		{ name: 'The Night Gardner', rating: '10+', author: 'Jonathan Auxier' },
-		{ name: 'Harry Potter', rating: '8+', author: 'Joanne Rowling' },
-	])
-);
-console.log(
-	sortByLastName([
-		{ name: 'The Night Gardner', rating: '10+', author: 'Jonathan Auxier' },
-		{ name: 'The Selection', rating: '13+', author: 'Kiera Cass' },
-		{ name: 'The School for Good and Evil', rating: '11+', author: 'Soman Chainani' },
-		{ name: 'Warcross', rating: '13+', author: 'Marie Lu' },
-	])
-);
+// console.log(
+// 	sortByLastName([
+// 		{ name: 'Harry Potter', rating: '8+', author: 'Joanne Rowling' },
+// 		{ name: 'Warcross', rating: '13+', author: 'Marie Lu' },
+// 		{ name: 'The Hunger Games', rating: '12+', author: 'Suzanne Collins' },
+// 	])
+// );
+// console.log(
+// 	sortByLastName([
+// 		{ name: 'The Night Gardner', rating: '10+', author: 'Jonathan Auxier' },
+// 		{ name: 'Harry Potter', rating: '8+', author: 'Joanne Rowling' },
+// 	])
+// );
+// console.log(
+// 	sortByLastName([
+// 		{ name: 'The Night Gardner', rating: '10+', author: 'Jonathan Auxier' },
+// 		{ name: 'The Selection', rating: '13+', author: 'Kiera Cass' },
+// 		{ name: 'The School for Good and Evil', rating: '11+', author: 'Soman Chainani' },
+// 		{ name: 'Warcross', rating: '13+', author: 'Marie Lu' },
+// 	])
+// );
 //[
 //   { name: "The Hunger Games", rating: "12+", author: "Suzanne Collins" },
 //   { name: "Warcross", rating: "13+", author: "Marie Lu" },
 //   { name: "Harry Potter", rating: "8+", author: "Joanne Rowling" },
 // ]
+
+// Create a function which takes in an encoded string and returns an object according to the following example:
+function parseCode(str) {
+	const info = str.split(/0+/);
+	return { firstName: info[0], lastName: info[1], id: info[2] };
+}
+// console.log(parseCode('John000Doe000123'));
+// console.log(parseCode('michael0smith004331'));
+// console.log(parseCode('Thomas00LEE0000043'));
+
+// Create a function that takes an array of objects like { name: "John", notes: [3, 5, 4]} and returns an array of objects like { name: "John", avgNote: 4 }. If student has no notes (an empty array) then let's assume avgNote: 0.
+
+function get_avg(arr) {
+	return arr.map(val => ({
+		name: val.name,
+		avgNote: eval(val.notes.join(',').replace(/,/g, '+'))/val.notes.length || 0,
+	}));
+}
+// console.log(get_avg([{ name: 'John', notes: [3, 5, 4] }]));
