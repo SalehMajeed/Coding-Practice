@@ -40,7 +40,7 @@ function is_valid(s) {
 			return false;
 		}
 	}
-	for (const char of s) return stack.length == 0 ? true : false;
+	return stack.length == 0 ? true : false;
 }
 console.log(is_valid('()')); // true
 console.log(is_valid('()[]{}')); // true
