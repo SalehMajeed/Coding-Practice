@@ -1,23 +1,25 @@
-function sum(l1, l2) {
-	const total = l1.val + l2.val;
-	if (l1.next == null && l2.next == null) {
-		return total;
-	}
-	if (total > 9) {
-		const next_val = Math.floor(total / 10);
-		l2.next.val += next_val;
-		return `${total % 10} ${sum(l1.next, l2.next)}`;
-	}
-	return `${total} ${sum(l1.next, l2.next)}`;
-}
 function add_two_number(l1, l2) {
-	const stack = [];
-	let list = null;
-	stack.push(...sum(l1, l2).split(' '));
-	stack.reverse().map(each_val => {
-		list = { val: each_val, next: list };
-	});
-	return list;
+	let i = 0;
+	while (l1 && l2) {
+		if (i > 500) {
+			break;
+		}
+
+		i++;
+
+		console.log(l1.val, l2.val);
+
+		if (l1.val == null) {
+			l1.val = 0;
+		}
+
+		if (l2.val == null) {
+			l1.val = 0;
+		}
+
+		l1 = l1.next;
+		l2 = l2.next;
+	}
 }
 
 let l1 = {
@@ -57,19 +59,19 @@ l2 = {
 // console.log(add_two_number(l1, l2));
 
 l1 = {
-	val: 9,
+	val: 4,
 	next: {
-		val: 9,
+		val: 3,
 		next: {
-			val: 9,
+			val: 2,
 			next: {
-				val: 9,
+				val: 1,
 				next: {
-					val: 9,
+					val: 5,
 					next: {
-						val: 9,
+						val: 6,
 						next: {
-							val: 9,
+							val: 7,
 							next: null,
 						},
 					},
@@ -80,13 +82,13 @@ l1 = {
 };
 
 l2 = {
-	val: 9,
+	val: 1,
 	next: {
-		val: 9,
+		val: 2,
 		next: {
-			val: 9,
+			val: 3,
 			next: {
-				val: 9,
+				val: 4,
 				next: null,
 			},
 		},
