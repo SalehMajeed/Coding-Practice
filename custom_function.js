@@ -106,4 +106,52 @@ function make_zero(arr) {
 	// return arr;
 }
 
-console.log(make_zero(arr));
+// console.log(make_zero(arr));
+
+Array.prototype.custom_every = function (callback) {
+	let previous = callback(this[0]);
+	for (let i = 1; i < this.length; i++) {
+		if (callback(this[i]) != previous) {
+			return false;
+		}
+		previous = callback(this[i]);
+	}
+	return true;
+};
+
+// console.log([2, 2, 2, 2, 2].custom_every(val => val % 2));
+
+Array.prototype.custom_some = function (callback) {
+	let previous = callback(this[0]);
+	for (let i = 1; i < this.length; i++) {
+		if (callback(this[i]) == previous) {
+			return true;
+		}
+		previous = callback(this[i]);
+	}
+	return false;
+};
+
+// console.log([3, 2, 2, 2, 2].custom_some(val => val % 2));
+
+Array.prototype.custom_find = function (callback) {
+	for (let i = 0; i < this.length; i++) {
+		if (callback(this[i]) == true) {
+			return this[i];
+		}
+	}
+	return -1;
+};
+
+// console.log([2, 3, 4, 5].custom_find(val => val < 3));
+
+Array.prototype.custom_find_index = function (callback) {
+	for (let i = 0; i < this.length; i++) {
+		if (callback(this[i]) == true) {
+			return i;
+		}
+	}
+	return -1;
+};
+
+// console.log([2, 3, 4, 5].custom_find_index(val => val > 4));
