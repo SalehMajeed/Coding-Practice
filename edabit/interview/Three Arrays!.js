@@ -7,7 +7,6 @@ function sum_common(arr1, arr2, arr3) {
 			delete arr3[arr3.indexOf(arr1[i])];
 		}
 	}
-	// console.log(common);
 	return common.reduce((acc, val) => (acc += val), 0);
 }
 
