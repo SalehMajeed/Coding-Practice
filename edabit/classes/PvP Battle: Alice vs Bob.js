@@ -28,11 +28,18 @@ class Player {
 
 			// getter for hp
 			this.hp += skill_statistics.heal || 0;
-			return `${this.name} used ${name}, ${skill_statistics.desc}, against ${target.name}, doing ${damage.toFixed(
-				2
-			)} damage! ${this.name} healed for ${skill_statistics.heal} health! ${target.name} is at ${
-				target.hp
-			}% health`;
+			let res = `${this.name} used ${name}, ${skill_statistics.desc}, against ${
+				target.name
+			}, doing ${damage.toFixed(2)} damage!`;
+			if (skill_statistics.heal) {
+				res += ` ${this.name} healed for ${skill_statistics.heal} health!`;
+			}
+			if (target.hp) {
+				res += `${target.name} is at ${target.hp}% health`;
+			} else {
+				res += `${target.name} died.`;
+			}
+			return res;
 		});
 	}
 
@@ -53,10 +60,10 @@ class Player {
 	}
 }
 
-const alice = new Player('Alice', 110, 50, 10);
-const bob = new Player('Bob', 100, 60, 20);
+const new_alice = new Player('Alice', 110, 50, 10);
+const new_bob = new Player('Bob', 100, 60, 20);
 
-alice.learnSkill('fireball', {
+new_alice.learnSkill('fireball', {
 	damage: 23,
 	penetration: 1.2,
 	heal: 5,
@@ -64,10 +71,58 @@ alice.learnSkill('fireball', {
 	desc: 'a firey magical attack',
 });
 
-console.log(alice.fireball(bob));
+console.log(new_alice.fireball(new_bob));
 // Alice used fireball, a firey magical attack, against Bob, doing
 // 18.68 damage! Alice healed for 5 health! Bob is at 81.32% health.
 
+new_bob.learnSkill('superbeam', {
+	damage: 200,
+	penetration: 50,
+	heal: 50,
+	cost: 75,
+	desc: 'an overpowered attack, pls nerf',
+});
+
+console.log(new_bob.superbeam(new_alice));
+// Bob attempted to use superbeam, but didn't have enough energy!
+
+console.log('----FIGHT!----');
+//player class exists
+const alice = new Player('Alice', 110, 50, 10);
+const bob = new Player('Bob', 100, 60, 20);
+console.log('Does our Player class exist?');
+console.log(
+	bob instanceof Player && alice instanceof Player,
+	true,
+	`Alice and Bob don't seem to be instances of the player class.`
+);
+
+//learn skill
+console.log('\n----\nCan our competitors learn new skills?');
+console.log(typeof alice.learnSkill, 'function', 'Missing `learnSkill` method!');
+
+//skill is function
+console.log('\n----\nDoes the learnSkill method allow us to add a skill?');
+alice.learnSkill('fireball', {
+	damage: 23,
+	penetration: 1.2,
+	heal: 0,
+	cost: 15,
+	desc: 'a firey magical attack',
+});
+console.log(typeof alice.fireball, 'function', 'Could not learn skill "Fireball"!');
+
+//cast skill
+console.log('\n----\nCan we cast our new skill?');
+
+console.log(
+	alice.fireball(bob),
+	'Alice used fireball, a firey magical attack, against Bob, doing 18.68 damage! Bob is at 81.32% health.',
+	'Using Fireball returned the wrong string!'
+);
+
+//too high energy cost?
+console.log('\n----\nWhat about skills with too high an energy cost?');
 bob.learnSkill('superbeam', {
 	damage: 200,
 	penetration: 50,
@@ -76,5 +131,33 @@ bob.learnSkill('superbeam', {
 	desc: 'an overpowered attack, pls nerf',
 });
 
-console.log(bob.superbeam(alice));
-// Bob attempted to use superbeam, but didn't have enough energy!
+console.log(
+	bob.superbeam(alice),
+	`Bob attempted to use superbeam, but didn't have enough energy!`,
+	'Bob should return that he cannot use this skill!'
+);
+
+//can get a player's HP percent and energy
+console.log("\n----\nAfter that devastating attack, let's check in on Alice and Bob:");
+console.log(bob.hpPerc + '% health', '81.32% health', `Bob should be at 81.32% health`);
+console.log(alice.en + ' energy', '35 energy', `Alice's energy should be 35.`);
+
+//Combo attack
+console.log("\n----\nBut wait! Bob's back in action!");
+bob.learnSkill('Meteor Strike', {
+	damage: 118,
+	penetration: 4,
+	heal: 5,
+	cost: 20,
+	desc: 'an attack that basically ends the game (gg)',
+});
+
+console.log(
+	bob['Meteor Strike'](alice),
+	'Bob used Meteor Strike, an attack that basically ends the game (gg), against Alice, doing 110.92 damage! Bob healed for 5 health! Alice died. '
+);
+
+console.log('\n----\nAre the four health and energy properties private?');
+['hp', 'maxHp', 'en', 'maxEn'].forEach(prop => {
+	console.log(bob['#' + prop], undefined, `Property #${prop} should not be publically accessible!`);
+});
