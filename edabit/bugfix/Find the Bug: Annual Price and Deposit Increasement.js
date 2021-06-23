@@ -12,8 +12,8 @@ function migrate_product(oldProduct) {
 	return { oldProduct, newProduct };
 }
 
-console.log(
-	migrate_product({
+console.logs(
+	migrateProduct({
 		product: 'Milk',
 		price: 1.2,
 		containers: [
@@ -21,5 +21,25 @@ console.log(
 			{ type: 'can', deposit: 0.1, liters: 0.33 },
 			{ type: 'carton', deposit: null, liters: 1 },
 		],
-	})
+	}),
+	{
+		oldProduct: {
+			product: 'Milk',
+			price: 1.2,
+			containers: [
+				{ type: 'bottle', deposit: 0.15, liters: 1.5 },
+				{ type: 'can', deposit: 0.1, liters: 0.33 },
+				{ type: 'carton', deposit: null, liters: 1 },
+			],
+		},
+		newProduct: {
+			product: 'Milk',
+			price: 1.38,
+			containers: [
+				{ type: 'bottle', deposit: 0.2, liters: 1.5 },
+				{ type: 'can', deposit: 0.1, liters: 0.33 },
+				{ type: 'carton', deposit: null, liters: 1 },
+			],
+		},
+	}
 );
