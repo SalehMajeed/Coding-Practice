@@ -1,7 +1,6 @@
 // As it stands, only 1/4 tests pass
 // Fix the code so that all tests pass
-function change(x, times) {
-    x = [...x];
+function change([...x], times) {
 	for (let i = 0; i < x.length; i++) {
 		let j = 1;
 		while (j <= times) {
