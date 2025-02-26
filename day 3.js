@@ -1,3 +1,11 @@
+// python fundamentals
+// importing & cleaning data
+// data manipulation
+// data visualization(python, opencv, panda, metplotlib, seabon, numpy, time series, statistics)
+// statistics fundamentals
+// time series
+// image processing
+
 // 21 ==> Profitable Gamble
 //     Create a function that takes in three arguments (prob, prize, pay) and returns true if prob * prize > pay; otherwise return false.
 //     To illustrate, profitableGamble(0.2, 50, 9) should yield true, since the net profit is 1 (0.2 * 50 - 9), and 1 > 0.

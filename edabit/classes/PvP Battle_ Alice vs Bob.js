@@ -20,7 +20,7 @@ class Player {
 			}
 			const arm = target.armor - skill_statistics.penetration;
 			target.armor = arm;
-			this.#en -= skill_statistics.cost;
+			this.en -= skill_statistics.cost;
 			const damage = skill_statistics.damage * ((100 - arm) / 100);
 
 			// setter for hp

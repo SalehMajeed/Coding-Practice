@@ -62,16 +62,16 @@ console.log(footballPoints(3,4,2))
 console.log(footballPoints(5,0,2))
 console.log(footballPoints(0,0,1))
 
-// 16 ==> Are the Numbers Equal?
-//     Create a function that returns true when num1 is equal to num2; otherwise return false.
-console.log("16 --->")
-function isSameNum(n1,n2){
-    return Object.is(n1,n2)
-}
-console.log(isSameNum(4,8))
-console.log(isSameNum(2,2))
-console.log(isSameNum(2,"2"))
-console.log(isSameNum(0,-0))
+    // 16 ==> Are the Numbers Equal?
+    //     Create a function that returns true when num1 is equal to num2; otherwise return false.
+    console.log("16 --->")
+    function isSameNum(n1,n2){
+        return Object.is(n1,n2)
+    }
+    console.log(isSameNum(4,8))
+    console.log(isSameNum(2,2))
+    console.log(isSameNum(2,"2"))
+    console.log(isSameNum(0,-0))
 
 // 17 ==> Minimal I: If Boolean Then Boolean
 //     function isEven(n) {

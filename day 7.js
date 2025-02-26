@@ -105,6 +105,13 @@ console.log(nSidedShape(9))
 //         getMultipliedArr([5, 382, 0]) ➞ [10, 764, 0]
 console.log("65 --->")
 function getMultipliedArr(array){
+    const newArr = [];
+    for(let i = 0; i < array.length; i++) {
+        newArr.push(arr[i] * 2);
+    }
+    arr.forEach(eachVal => {
+        newArr.push(eachVal * 2);
+    })
     return array.map( element => element * 2)
 }
 console.log(getMultipliedArr([2, 5, 3]))
@@ -186,7 +193,7 @@ console.log(wordLengths(["She", "sells", "seashells", "down", "by", "the", "seas
 //         getFilename("ffprobe.exe") ➞ "ffprobe.exe"
 console.log("71 --->")
 function getFilename(filename){
-        
+    const newArr = filename.split("/").at(-1);
     return (filename.split("/"))[(filename.split("/")).length-1]
 
 }

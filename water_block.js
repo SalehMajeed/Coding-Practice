@@ -1,4 +1,3 @@
-let arr = [3, 0, 2, 0, 4, 0, 2, 0, 1]; //-> 10
 function water_block(arr) {
 	let piller_1 = null;
 	let piller_2 = null;
@@ -59,7 +58,7 @@ function water_block_brute_force(arr) {
 	for (let i = 0; i < arr.length; i++) {
 		let left_max = 0;
 		let right_max = 0;
-		
+
 		for (let j = 0; j <= i; j++) {
 			left_max = Math.max(left_max, arr[j]);
 		}
@@ -71,10 +70,28 @@ function water_block_brute_force(arr) {
 	return ans;
 }
 
-console.log(water_block_brute_force(arr));
+function water_block_dynamic(arr) {
+	const MAX_VAL = arr.indexOf(Math.max(...arr));
+	const left_max = [];
+	const right_max = [];
+	let ans = 0;
+	for (let i = MAX_VAL; i <= arr.length - 1; i++) {
+		left_max.push(arr[i]);
+	}
+	for (let i = MAX_VAL; i <= 0; i--) {
+		right_max.push(arr[i]);
+	}  	 		
+	for (let i = 0; i < arr.length; i++) {
+		ans += Math.abs(Math.min(left_max[i] || 0, right_max[i] || 0) - arr[i]);
+	}
+	return ans;
+}
+
+let arr = [3, 0, 2, 0, 4, 0, 2, 0, 1]; //-> 10
+console.log(water_block_dynamic(arr));
 
 arr = [3, 0, 2, 0, 4, 0, 2, 0, 3]; //-> 14
-console.log(water_block_brute_force(arr));
+console.log(water_block_dynamic(arr));
 
 arr = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]; //-> 6
-console.log(water_block_brute_force(arr));
+console.log(water_block_dynamic(arr));

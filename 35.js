@@ -49,7 +49,7 @@ function syllable(string) {
 	let val = string
 		.replace(/([^aeiouy])([^aeiouy])/g, '$1##$2')
 		.split('##')
-		.map((element) => {
+		.map(element => {
 			let val = [];
 			if (element.length >= 5) {
 				val.push(

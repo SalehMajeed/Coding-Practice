@@ -68,6 +68,7 @@ console.log(newWord("plum"))
 //     Create a function to concatenate two integer arrays.
 console.log("47 --->")
 function concat(array1, array2){
+    [array1, array2].flat(1);
     return [...array1, ...array2]
     // .concate array1.concate(array2)
     // loop
@@ -98,7 +99,7 @@ console.log(search(["hi", "edabit", "fgh", "abc"], "fgh"))
 //     Given an n * n * n Rubik's cube, return the number of individual stickers that are needed to cover the whole cube. Keep in mind there are 6 faces to keep track of.
 console.log("49 --->")
 function howManyStickers(n){
-    return (n * n) * 6
+    return 6 * (n * n)
 }
 console.log(howManyStickers(1))
 console.log(howManyStickers(2))

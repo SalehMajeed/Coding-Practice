@@ -3,17 +3,9 @@
 function getKMostFreq(arr, num) {
 	let obj = {};
 	for (let i = 0; i < arr.length - 1; i++) {
-		if (typeof obj[arr[i]] == 'undefined') {
-			obj[arr[i]] = 1;
-		} else {
-			obj[arr[i]] = obj[arr[i]] + 1;
-		}
+		obj[arr[i]]++ || (obj[arr[i]] = 1);
 	}
-	return Object.entries(obj)
-		.sort((a, b) => {
-			return a[1] > b[1] ? 1 : -1;
-		})
-		.slice(num);
+	return obj;
 }
 
 console.log(
